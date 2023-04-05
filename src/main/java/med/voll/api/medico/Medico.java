@@ -21,5 +21,13 @@ public class Medico {
     @Enumerated
     private Especialidad especialidad;
     @Embedded
-    private med.voll.api.direccion.Direccion Direccion;
+    private Direccion direccion;
+
+    public Medico(RegistroMedicos medicos) {
+        this.nombre=medicos.nombre();
+        this.email=medicos.email();
+        this.cedula=medicos.Cedula();
+        this.especialidad=medicos.especialidad();
+        this.direccion=new Direccion(medicos.direccion());
+    }
 }
