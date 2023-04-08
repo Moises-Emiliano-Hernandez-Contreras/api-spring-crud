@@ -1,5 +1,6 @@
 package med.voll.api.direccion;
 
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Embeddable
 public class Direccion {
     private String calle;
     private String numero;
