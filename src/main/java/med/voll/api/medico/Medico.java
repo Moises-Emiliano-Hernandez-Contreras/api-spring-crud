@@ -24,7 +24,7 @@ public class Medico {
     private Especialidad especialidad;
     @Embedded
     private Direccion direccion;
-
+    private Boolean estado;
     public Medico(RegisterMedicos medicos) {
         this.nombre=medicos.nombre();
         this.email=medicos.email();
@@ -32,13 +32,26 @@ public class Medico {
         this.cedula=medicos.Cedula();
         this.especialidad=medicos.especialidad();
         this.direccion=new Direccion(medicos.direccion());
+        this.estado=true;
         System.out.println(this.nombre);
         System.out.println(medicos.nombre());
     }
 
     public void ActualizarDatos(ActualizarMedicos nuevosDatosmedico) {
-        this.nombre=nuevosDatosmedico.nombre();
-        this.email=nuevosDatosmedico.email();
-        this.
+        if(nuevosDatosmedico.nombre()!=null){
+            this.nombre=nuevosDatosmedico.nombre();
+        }
+        if(nuevosDatosmedico.email()!=null){
+            this.email=nuevosDatosmedico.email();
+        }
+        if(nuevosDatosmedico.direccion()!=null){
+            this.direccion=direccion.actualizarDireccion(nuevosDatosmedico.direccion());
+        }
+
+
+    }
+
+    public void CambioEstado() {
+        this.estado=false;
     }
 }

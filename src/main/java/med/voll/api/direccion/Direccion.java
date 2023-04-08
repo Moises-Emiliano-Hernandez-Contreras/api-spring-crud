@@ -21,4 +21,12 @@ public class Direccion {
         this.barrio=direccion.barrio();
         this.ciudad= direccion.ciudad();
     }
+
+    public Direccion actualizarDireccion(DatosDireccion direccion) {
+        this.calle=direccion.calle();
+        this.numero= direccion.numero();
+        this.barrio=direccion.barrio();
+        this.ciudad= direccion.ciudad();
+        return this;
+    }
 }

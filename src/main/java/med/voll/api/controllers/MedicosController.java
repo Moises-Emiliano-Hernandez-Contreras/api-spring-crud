@@ -1,5 +1,6 @@
 package med.voll.api.controllers;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,19 @@ public class MedicosController {
     }
     @GetMapping
     public Page<ListaDeMedicos> listarMedicos(@PageableDefault(size = 2,sort = "Cedula") Pageable paginacion){
-        return medicoRepository.findAll(paginacion).map(ListaDeMedicos::new);
+        return medicoRepository.findByEstadoTrue(paginacion).map(ListaDeMedicos::new);
+        //return medicoRepository.findAll(paginacion).map(ListaDeMedicos::new);
     }
     @PutMapping
+    @Transactional
     public void EditarMedicos(@RequestBody @Valid ActualizarMedicos nuevosDatosmedico){
         Medico medico = medicoRepository.getReferenceById(nuevosDatosmedico.id());
         medico.ActualizarDatos(nuevosDatosmedico);
+    }
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void BorrarMedico(@PathVariable Long id){
+        Medico medico = medicoRepository.getReferenceById(id);
+        medico.CambioEstado();
     }
 }
